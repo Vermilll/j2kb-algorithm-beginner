@@ -1,5 +1,5 @@
-8393. 합
-
+8393. 합  
+```
 import java.util.Scanner;
 
 public class Main{
@@ -15,11 +15,11 @@ public class Main{
 		System.out.println(sum);
 	}
 }
-
-1929. 소수 구하기
-에라토스테네스의 체
+```
+1929. 소수 구하기  
+에라토스테네스의 체  
 https://namu.wiki/w/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98%20%EC%B2%B4
-
+```
 import java.util.Scanner;
 
 public class Main{
@@ -46,9 +46,9 @@ public class Main{
         }
     }
 }
-
-1978. 소수 찾기
-
+```
+1978. 소수 찾기  
+```
 import java.util.Scanner;
 
 public class Main{
@@ -78,10 +78,10 @@ public class Main{
         System.out.println(count);
     }
 }
-
-4948. 베르트랑 공준
+```
+4948. 베르트랑 공준  
 문제를 잘못 이해해서 몇시간 동안 틀림..
-
+```
 import java.util.Scanner;
 
 public class Main{
@@ -114,4 +114,4 @@ public class Main{
         }
     }
 }
-
+```
