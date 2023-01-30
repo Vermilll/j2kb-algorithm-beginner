@@ -1,4 +1,4 @@
-## 문제
+## 8393. 합
 [https://www.acmicpc.net/problem/8393
 ](https://www.acmicpc.net/problem/8393)
 
