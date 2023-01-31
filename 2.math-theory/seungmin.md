@@ -15,7 +15,7 @@ public class Main{
 		System.out.println(sum);
 	}
 }
-```
+```java
 1929. 소수 구하기  
 에라토스테네스의 체  
 https://namu.wiki/w/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98%20%EC%B2%B4
@@ -48,7 +48,7 @@ public class Main{
 }
 ```
 1978. 소수 찾기  
-```
+```java
 import java.util.Scanner;
 
 public class Main{
@@ -80,7 +80,7 @@ public class Main{
 }
 ```
 4948. 베르트랑 공준  
-```
+```java
 import java.util.Scanner;
 
 public class Main{
@@ -116,7 +116,7 @@ public class Main{
 ```
 15649. N과 M(1)  
 백 트래킹
-```
+```java
 import java.util.Scanner;
  
 public class Main {
