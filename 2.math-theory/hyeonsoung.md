@@ -2,23 +2,6 @@
 [https://www.acmicpc.net/problem/8393
 ](https://www.acmicpc.net/problem/8393)
 
-n이 주어졌을 때, 1부터 n까지 합을 구하는 프로그램을 작성하시오.
-
-### 입력
-첫째 줄에 n (1 ≤ n ≤ 10,000)이 주어진다.
-```
-3
-```
-### 출력
-첫째 줄에 갑옷을 만들 수 있는 개수를 출력한다.
-
-```
-6
-```
-## 풀이
-
-
-
 ### 코드
 
 ```java
@@ -36,4 +19,45 @@ public class Sum {
   }
 }
 
+```
+
+## 1978. 소수 찾기
+[https://www.acmicpc.net/problem/8393](https://www.acmicpc.net/problem/1978)
+
+### 코드
+
+```java
+import java.util.Scanner;
+
+public class SosuSearch {
+
+	public static void main(String[] args) {
+		// Input
+		Scanner sc = new Scanner(System.in);
+		int n  = sc.nextInt();
+		int[] arr = new int[n];
+		for(int i = 0 ; i < n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		int cnt = 0;
+		
+		// Output
+		for(int i = 0; i < n; i++) {
+			boolean isPrime = false;
+			if(arr[i] == 1) {
+				continue;
+			}
+			for(int j = 2; j < arr[i]; j++) {
+				if(arr[i] % j == 0) {
+					isPrime = true;
+					break;
+				}
+			}
+			if(!isPrime) {
+				cnt++;
+			}
+		}
+		System.out.println(cnt);
+	}
+}
 ```
