@@ -80,7 +80,6 @@ public class Main{
 }
 ```
 4948. 베르트랑 공준  
-문제를 잘못 이해해서 몇시간 동안 틀림..
 ```
 import java.util.Scanner;
 
@@ -113,5 +112,47 @@ public class Main{
             System.out.println(count);
         }
     }
+}
+```
+15649. N과 M(1)  
+백 트래킹
+```
+import java.util.Scanner;
+ 
+public class Main {
+	static int[] arr;
+	static boolean[] use;
+	static int N, M;
+    
+	public static void main(String[] args) {
+ 
+		Scanner sc = new Scanner(System.in);
+ 
+        N = sc.nextInt();
+        M = sc.nextInt();
+ 
+		use = new boolean[N];
+		arr = new int[M];
+		dfs(0);
+	}
+ 
+	public static void dfs(int depth) {
+		if (depth == M) {
+			for (int val : arr) {
+				System.out.print(val + " ");
+			}
+			System.out.println();
+			return;
+		}
+ 
+		for (int i = 0; i < N; i++) {
+			if (!use[i]) {
+				use[i] = true;
+				arr[depth] = i + 1;
+				dfs(depth + 1);
+				use[i] = false;
+			}
+		}
+	}
 }
 ```
