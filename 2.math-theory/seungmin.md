@@ -222,3 +222,23 @@ public class Main{
     }
 }
 ```
+
+11653. 소인수분해  
+```java
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        int num = sc.nextInt();
+        int a = 2;
+        while(num>1){
+            if(num%a==0){
+                num /= a;
+                System.out.println(a);
+            }else{a++;}
+        }
+    }
+}
+```
