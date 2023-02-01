@@ -242,3 +242,51 @@ public class Main{
     }
 }
 ```
+
+6588. 골드바흐의 추측
+```java
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        boolean[] arr = new boolean[1000001];
+        arr[0] = true;
+        arr[1] = true;
+            
+            for(int i=2;i*i<=1000000;i++){
+                if(arr[i]){continue;}
+                for(int j=i*i;j<=1000000;j+=i){
+                    arr[j] = true;
+                }
+            }
+        
+        while(num!=0){
+            
+            int a = 3;
+            int b = num-1;
+            
+            while(true){
+                while(arr[a] && a<b){a+=2;}
+                while(arr[b] && a<b){b-=2;}
+                
+                if(a>b){
+                    System.out.println("Goldbach's conjecture is wrong.");
+                    break;
+                }
+                
+                if(a+b==num){
+                    System.out.println(num+" = "+a+" + "+b);
+                    break;
+                }
+                else if(a+b<num){a+=2;}
+                else if(a+b>num){b-=2;}
+                
+            }
+            
+            num = sc.nextInt();
+        }
+    }
+}
+```
