@@ -1,5 +1,5 @@
 8393. 합  
-```
+```java
 import java.util.Scanner;
 
 public class Main{
@@ -15,11 +15,11 @@ public class Main{
 		System.out.println(sum);
 	}
 }
-```java
+```
 1929. 소수 구하기  
 에라토스테네스의 체  
 https://namu.wiki/w/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98%20%EC%B2%B4
-```
+```java
 import java.util.Scanner;
 
 public class Main{
@@ -156,3 +156,28 @@ public class Main {
 	}
 }
 ```
+
+2609. 최대공약수와 최소공배수  
+유클리드 공제법  
+'''java
+import java.util.Scanner;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        
+        int c = a;
+        int d = b;
+        while(d!=0){
+            int temp = c%d;
+            c = d;
+            d = temp;
+        }
+        System.out.println(c);
+        System.out.println(a*b/c);
+    }
+}
+'''
