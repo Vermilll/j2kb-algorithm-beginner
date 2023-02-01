@@ -158,7 +158,7 @@ public class Main {
 ```
 
 2609. 최대공약수와 최소공배수  
-유클리드 공제법  
+유클리드 호제법  
 '''java
 import java.util.Scanner;
 
