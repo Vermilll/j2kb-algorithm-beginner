@@ -18,7 +18,6 @@ public class Main{
 ```
 1929. 소수 구하기  
 에라토스테네스의 체  
-https://namu.wiki/w/%EC%97%90%EB%9D%BC%ED%86%A0%EC%8A%A4%ED%85%8C%EB%84%A4%EC%8A%A4%EC%9D%98%20%EC%B2%B4
 ```java
 import java.util.Scanner;
 
@@ -159,7 +158,7 @@ public class Main {
 
 2609. 최대공약수와 최소공배수  
 유클리드 호제법  
-'''java
+```java
 import java.util.Scanner;
 
 public class Main{
@@ -180,4 +179,4 @@ public class Main{
         System.out.println(a*b/c);
     }
 }
-'''
+```
