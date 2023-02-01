@@ -181,7 +181,7 @@ public class Main{
 }
 ```
 
-9020. 골드바흐의 추측(틀림)  
+9020. 골드바흐의 추측  
 에라토스테네스의 체  
 ```java
 import java.util.Scanner;
@@ -190,33 +190,35 @@ public class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         
-        int num = sc.nextInt();
+        int count = sc.nextInt();
         
-        if(num%2!=0){return;}
-        
-        boolean[] arr = new boolean[num+1];
+        boolean[] arr = new boolean[10001];
         arr[0] = true;
         arr[1] = true;
         
-        for(int i=2;i*i<=num;i++){
-            for(int j=i*i;j<=num;j+=i){
-                arr[j] = true;
-            }
-        }
-        
-        int a = num/2;
-        int b = num/2;
-        
-        while(true){
-            while(arr[a]){a--;}
-            while(arr[b]){b++;}
+        for(int c=0;c<count;c++){
+            int num = sc.nextInt();
             
-            if(a+b==num){break;}
-            else if(a+b<num){b++;}
-            else if(a+b>num){a--;}
-        }
+            for(int i=2;i*i<=num;i++){
+                if(arr[i]){continue;}
+                for(int j=i*i;j<=num;j+=i){
+                    arr[j] = true;
+                }
+            }
         
-        System.out.println(a+" "+b);
+            int a = num/2;
+            int b = num/2;
+        
+            while(true){
+                while(arr[a]){a--;}
+                while(arr[b]){b++;}
+            
+                if(a+b==num){break;}
+                else if(a+b<num){b++;}
+                else if(a+b>num){a--;}
+            }
+            System.out.println(a+" "+b);
+        }
     }
 }
 ```
