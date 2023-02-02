@@ -410,3 +410,37 @@ public class Main{
     }
 }
 ```
+
+2981. 검문
+```java
+import java.util.*;
+
+public class Main {
+	public static int GCD(int a, int b) {
+		
+		if(b == 0) return a;
+		else return GCD(b, a%b);
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int count = sc.nextInt();
+		int arr[] = new int[count];
+		for (int i=0;i<count;i++) {
+			arr[i] = sc.nextInt();
+		}
+		Arrays.sort(arr);
+		
+		int dif = arr[1] - arr[0];
+		for (int i=2;i<count;i++) {
+			dif = GCD(dif, arr[i] - arr[i-1]);
+		}
+		
+		for (int i=2;i<dif;i++) {
+			if(dif%i==0) {System.out.print(i+" ");}
+		}
+		System.out.print(dif+" ");
+	}
+}
+```
