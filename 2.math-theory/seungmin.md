@@ -372,3 +372,41 @@ public class Main{
     }
 }
 ```
+
+15650. N과 M (2)
+```java
+import java.util.*;
+
+public class Main{
+    static int N, M;
+    static int[] temp;
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        M = sc.nextInt();
+        temp = new int[M];
+        
+        dfs(0,0,temp);
+    }
+    
+    public static void dfs(int depth,int cursor,int[] temp){
+        if(cursor>N){
+            return;
+        }
+        
+        if(depth == M){
+            for(int i=0;i<M;i++){
+                System.out.print(temp[i]+" ");
+            }
+            System.out.println();
+            return;
+        }
+        
+        for(int i=1;i<N-cursor+1;i++){
+            temp[depth] = cursor+i;
+            dfs(depth+1,cursor+i,temp);
+        }
+    }
+}
+```
