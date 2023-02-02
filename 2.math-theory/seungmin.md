@@ -327,3 +327,48 @@ public class Main{
     }
 }
 ```
+
+66003. 로또
+```java
+import java.util.*;
+
+public class Main{
+    static int count;
+    static int[] num;
+    static int[] temp;
+        
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        while(true){
+            count = sc.nextInt();
+            if(count == 0){break;}
+            
+            num = new int[count];
+            temp = new int[6];
+            
+            for(int i=0;i<count;i++){
+                num[i] = sc.nextInt();
+            }
+            
+            dfs(0,0,temp);
+            System.out.println();
+        }
+    }
+    
+    public static void dfs(int depth,int cursor,int[] temp){
+        if(cursor>count){return;}
+        
+        if(depth == 6){
+            for(int i=0;i<6;i++){System.out.print(temp[i]+" ");}
+            System.out.println();
+            return;
+        }
+        
+        for(int i=1;i<count-cursor+1;i++){
+            temp[depth] = num[cursor+i-1];
+            dfs(depth+1,cursor+i,temp);
+        }
+    }
+}
+```
