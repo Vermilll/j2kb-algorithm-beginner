@@ -290,3 +290,40 @@ public class Main{
     }
 }
 ```
+
+1182. 부분수열의 합
+```java
+import java.util.*;
+
+public class Main{
+    static int depth, num, count;
+    static int[] arr;
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        depth = sc.nextInt();
+        num = sc.nextInt();
+        arr = new int[depth];
+        count = 0;
+        
+        for(int i=0;i<depth;i++){
+            arr[i] = sc.nextInt();
+        }
+        
+        dfs(0,0);
+        if(num == 0){count--;}
+        
+        System.out.println(count);
+    }
+    
+    public static void dfs(int dep,int sum){
+        if(dep == depth){
+            if(sum == num){count++;}
+            return;
+        }
+        
+        dfs(dep+1,sum + arr[dep]);
+        dfs(dep+1,sum);
+    }
+}
+```
