@@ -328,7 +328,7 @@ public class Main{
 }
 ```
 
-66003. 로또
+6603. 로또
 ```java
 import java.util.*;
 
