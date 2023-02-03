@@ -21,13 +21,6 @@ public class b1929 {
       }
     }
     
-    // for(int i=startN; i<=endN; i++) {
-    //   boolean isDecimal = compareDecimal(i); // true면 소수
-    //   if(isDecimal) {
-    //     bw.write(String.valueOf(i) + '\n');
-    //   }
-    // }
-    
      bw.flush();
      bw.close();
      br.close();
