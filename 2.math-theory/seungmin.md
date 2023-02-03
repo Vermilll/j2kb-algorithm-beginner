@@ -127,8 +127,8 @@ public class Main {
  
 		Scanner sc = new Scanner(System.in);
  
-        N = sc.nextInt();
-        M = sc.nextInt();
+    		N = sc.nextInt();
+       		M = sc.nextInt();
  
 		use = new boolean[N];
 		arr = new int[M];
