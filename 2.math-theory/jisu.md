@@ -22,6 +22,7 @@ const solution = input => {
 ```
 
 ## 1929. 소수 구하기
+런타임 에러 
 
 ```jsx
 const input = require('fs').readFileSync('/dev/stdin').toString().trim();
