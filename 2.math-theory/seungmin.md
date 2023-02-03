@@ -144,7 +144,7 @@ public class Main {
 			return;
 		}
  
-		for (int i = 0; i < N; i++) {
+		for (int i=0;i<N;i++) {
 			if (!use[i]) {
 				use[i] = true;
 				arr[depth] = i + 1;
@@ -475,9 +475,85 @@ public class Main{
 
 10974. 모든 순열
 ```java
+import java.util.*;
+
+public class Main{
+    static int count;
+    static int[] arr;
+    static boolean[] check;
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        count = sc.nextInt();
+        arr = new int[count];
+        check = new boolean[count];
+        
+        dfs(0);
+    }
+    
+    public static void dfs(int depth){
+        if(depth == count){
+            for(int i=0;i<count;i++){
+                System.out.print(arr[i] + " ");
+            }
+            System.out.println();
+            return;
+        }
+        
+        for (int i=0;i<count;i++) {
+			if (!check[i]) {
+				check[i] = true;
+				arr[depth] = i+1;
+				dfs(depth+1);
+				check[i] = false;
+			}
+		}
+    }
+}
 ```
 2824. 최대공약
 ```java
+import java.util.*;
+import java.math.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        int count = sc.nextInt();
+        BigInteger a = new BigInteger("1");
+        for(int j=0;j<count;j++){
+            a = a.multiply(new BigInteger(String.valueOf(sc.nextInt())));
+        }
+        
+        count = sc.nextInt();
+        BigInteger b = new BigInteger("1");
+        for(int j=0;j<count;j++){
+            b = b.multiply(new BigInteger(String.valueOf(sc.nextInt())));
+        }
+        
+        String c;
+        
+        if(a.compareTo(b)>0){
+            c = gcd(b,a).toString();
+        }else{
+            c = gcd(a,b).toString();
+        }
+        
+        if(c.length()>9){
+            c = c.substring(c.length()-9);
+        }
+        
+        System.out.println(c);
+    }
+    
+    public static BigInteger gcd(BigInteger a,BigInteger b){
+        if(b.compareTo(new BigInteger("0"))==0){
+            return a;
+        }else{
+            return gcd(b,a.remainder(b));
+        }
+    }
+}
 ```
 17103. 골드바흐 파티션
 ```java
