@@ -557,7 +557,80 @@ public class Main{
 ```
 17103. 골드바흐 파티션
 ```java
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int count;
+        int k = sc.nextInt();
+        boolean[] arr = new boolean[1000001];
+        arr[0] = true;
+        arr[1] = true;
+        
+        for(int i=2;i*i<=1000000;i++){
+                if(arr[i]){continue;}
+                for(int j=i*i;j<=1000000;j+=i){
+                    arr[j] = true;
+                }
+        }
+        
+        for(int i=0;i<k;i++){
+            int num = sc.nextInt();
+            count = 0;
+            if(num%2!=0){continue;}
+            
+            int a = 2;
+            int b = num-1;
+            while(a<=b){
+                while(arr[a]){a++;}
+                while(arr[b]){b--;}
+                if(a>b){break;}
+                
+                if(a+b == num){
+                    b--;
+                    a++;
+                    count++;
+                }
+                else if(a+b > num){b--;}
+                else if(a+b < num){a++;}
+            }
+            
+            System.out.println(count);
+        }
+    }
+}
 ```
 17087. 숨바꼭질6
 ```java
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        int count = sc.nextInt();
+        int num = sc.nextInt();
+        
+        int[] arr = new int[count];
+        for(int i=0;i<count;i++){
+            arr[i] = num - sc.nextInt();
+            if(arr[i]<0){arr[i] = -arr[i];}
+        }
+        
+        Arrays.sort(arr);
+        int ans = arr[0];
+        
+        for(int i=1;i<=count;i++){
+            ans = def(ans, arr[i-1]);
+        }
+        
+        System.out.println(ans);
+    }
+    
+    public static int def(int a,int b){
+        if(b==0){return a;}
+        else{return def(b,a%b);}
+    }
+}
 ```
