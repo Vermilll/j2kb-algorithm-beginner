@@ -444,3 +444,31 @@ public class Main {
 	}
 }
 ```
+
+2407. 조합
+```java
+import java.util.*;
+import java.math.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        if(m<n/2){
+            m = n-m;
+        }
+        
+        BigInteger ans = new BigInteger("1");
+        for(int i=m+1;i<=n;i++){
+            ans = ans.multiply(new BigInteger(String.valueOf(i))); 
+        }
+        
+        for(int i=1;i<=n-m;i++){
+            ans = ans.divide(new BigInteger(String.valueOf(i)));
+        }
+        
+        System.out.println(ans);
+    }
+}
+```
