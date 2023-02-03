@@ -1,6 +1,6 @@
 # 1929 소수 구하기
 
-```
+```java
 public class b1929 {
 
   public static void main(String[] args) throws IOException {
@@ -67,7 +67,7 @@ public class b1929 {
 
 # 4948 베르트랑 공준
 
-```
+```java
 public class b4948 {
   public static void main(String[] args) throws IOException {
     /**
