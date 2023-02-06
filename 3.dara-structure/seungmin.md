@@ -141,3 +141,45 @@ public class Main{
     }
 }
 ```
+1406. 에디터
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        Stack<String> stack1 = new Stack<>();
+        Stack<String> stack2 = new Stack<>(); 
+        String s = br.readLine();
+        int count = Integer.parseInt(br.readLine());
+        
+        while(s.length() != 0){
+            stack1.push(s.substring(0,1));
+            s = s.substring(1);
+        }
+        
+        for(int i=0;i<count;i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String a = st.nextToken();
+            if(a.equals("L") && !stack1.empty()){
+                stack2.push(stack1.pop());
+            }else if(a.equals("D") && !stack2.empty()){
+                stack1.push(stack2.pop());
+            }else if(a.equals("B") && !stack1.empty()){
+                stack1.pop();
+            }else if(a.equals("P")){
+                stack1.push(st.nextToken());
+            }
+        }
+        while(!stack1.empty()){
+            stack2.push(stack1.pop());
+        }
+        while(!stack2.empty()){
+            sb.append(stack2.pop());
+        }
+        System.out.println(sb);
+    }
+}
+```
