@@ -93,3 +93,51 @@ public class Main{
     }
 }
 ```
+
+1935. 후위 표기식2
+```java
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        int count = sc.nextInt();
+        String s = sc.next();
+        Stack<Double> stack = new Stack<>();
+        Map<Character, Double> map = new HashMap<>();
+        char c = 'A';
+        
+        for(int i=0;i<count;i++){
+            map.put(c,Double.parseDouble(sc.next()));
+            c++;
+        }
+        
+        double ans;
+        for(int i=0;i<s.length();i++){
+            double a,b;
+            if(s.substring(i,i+1).equals("+")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(a + b);
+            }else if(s.substring(i,i+1).equals("-")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(b - a);
+            }else if(s.substring(i,i+1).equals("*")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(a * b);
+            }else if(s.substring(i,i+1).equals("/")){
+                a = stack.pop();
+                b = stack.pop();
+                stack.push(b / a);
+            }else{
+                stack.push(map.get(s.charAt(i)));
+            }
+        }
+        
+		System.out.print(String.format("%.2f", stack.pop()));
+    }
+}
+```
