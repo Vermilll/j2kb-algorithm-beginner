@@ -183,3 +183,109 @@ public class Main{
     }
 }
 ```
+
+1874. 스택 수열
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        int push = 1;
+        int pop = Integer.parseInt(br.readLine());
+        int count = 0;
+        
+        Stack<Integer> stack = new Stack<>();
+        String[] ans = new String[2*pop];
+        
+        for(int i=0;i<pop;i++){
+            int num = Integer.parseInt(br.readLine());
+            while(num >= push){
+                ans[count++] = "+";
+                stack.push(push++);
+            }
+            if(stack.pop() != num){
+                ans = new String[0];
+                count = 0;
+                System.out.println("NO");
+                break;
+            }else{
+                ans[count++] = "-";
+            }
+        }
+        for(int i=0;i<count;i++){
+            System.out.println(ans[i]);
+        }
+    }
+}
+```
+
+10799. 쇠막대기
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String s = br.readLine();
+        
+        Stack<String> stack = new Stack<>();
+        int count = 0;
+        
+        for(int i=0;i<s.length();i++){
+            String next = s.substring(i,i+1);
+            if(next.equals("(")){
+                stack.push("(");
+            }else if(next.equals(")")){
+                    stack.pop();
+                if(s.substring(i-1,i).equals("(")){
+                    count += stack.size();
+                }else{
+                    count += 1;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+}
+```
+
+2493. 탑
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int count = Integer.parseInt(br.readLine());
+        int poped = 0;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        Stack<Integer> stack = new Stack<>();
+        int[] arr = new int[count];
+        
+        for(int i=0;i<count;i++){
+            int num = Integer.parseInt(st.nextToken());
+            int a = i;
+            
+            while(!stack.empty()){
+                if(stack.peek() >= num){
+                    break;
+                }else{
+                    a = arr[--a];
+                    stack.pop();
+                }
+            }
+            stack.push(num);
+            sb.append(a + " ");
+            arr[i] = a;
+        }
+        
+        System.out.print(sb);
+    }
+}
+```
