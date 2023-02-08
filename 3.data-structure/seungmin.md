@@ -289,3 +289,127 @@ public class Main{
     }
 }
 ```
+17298. 오큰수
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int count = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[count];
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        Stack<Integer> ans = new Stack<>();
+        
+        for(int i=0;i<count;i++){
+            int num = Integer.parseInt(st.nextToken());
+            stack1.push(num);
+        }
+        
+        for(int i=0;i<count;i++){
+            int num = stack1.pop();
+            int a;
+            while(true){
+                if(stack2.empty()){
+                    a = -1;
+                    stack2.push(num);
+                    break;
+                }else if(stack2.peek() > num){
+                    a = stack2.peek();
+                    stack2.push(num);
+                    break;
+                }
+                stack2.pop();
+            }
+            ans.push(a);
+        }
+        while(!ans.empty()){
+            sb.append(ans.pop() + " ");
+        }
+        System.out.println(sb);
+    }
+}
+```
+
+2812. 크게 만들기
+```java
+```
+
+18258. 큐2
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        
+        Deque<String> queue = new LinkedList<>();
+        int count = Integer.parseInt(br.readLine());
+        
+        for(int i=0;i<count;i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            String s = st.nextToken();
+            if(s.equals("push")){
+                queue.add(st.nextToken());
+            }else if(s.equals("pop")){
+                if(queue.isEmpty()){
+                    sb.append("-1").append("\n");
+                }else{
+                    sb.append(queue.poll()).append("\n");
+                }
+            }else if(s.equals("front")){
+                if(queue.isEmpty()){
+                    sb.append("-1").append("\n");
+                }else{
+                    sb.append(queue.peek()).append("\n");
+                }                
+            }else if(s.equals("back")){
+                if(queue.isEmpty()){
+                    sb.append("-1").append("\n");
+                }else{
+                    sb.append(queue.peekLast()).append("\n");
+                }                
+            }else if(s.equals("size")){
+                sb.append(queue.size()).append("\n");
+            }else if(s.equals("empty")){
+                if(queue.isEmpty()){
+                    sb.append("1").append("\n");
+                }else{
+                    sb.append("0").append("\n");
+                }
+            }
+        }
+        
+        System.out.println(sb);
+    }
+}
+```
+2164. 카드2
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int num = sc.nextInt();
+        Deque<Integer> q = new LinkedList<>();
+        
+        for(int i=1;i<=num;i++){
+            q.add(i);
+        }
+        
+        while(q.size() != 1){
+            q.poll();
+            q.add(q.poll());
+        }
+        System.out.println(q.poll());
+    }
+}
+```
