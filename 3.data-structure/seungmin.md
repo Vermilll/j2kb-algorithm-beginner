@@ -413,3 +413,144 @@ public class Main{
     }
 }
 ```
+
+1021. 회전하는 큐
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int ans = 0;
+        
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int deck = Integer.parseInt(st.nextToken());
+        int count = Integer.parseInt(st.nextToken());
+        Deque<Integer> q = new LinkedList<>();
+        st = new StringTokenizer(br.readLine());
+        for(int i=0;i<deck;i++){
+            q.add(i+1);
+        }
+        
+        for(int i=0;i<count;i++){
+            int num = Integer.parseInt(st.nextToken());  
+            int temp = 0;
+            while(q.peekFirst() != num){
+                q.add(q.pollFirst());
+                temp++;
+            }
+            ans += temp < q.size()-temp ? temp : q.size() - temp;
+            q.pollFirst();
+        }
+        System.out.println(ans);
+    }
+}
+```
+
+1966. 프린터 큐
+```java
+
+```
+
+11866. 요세푸스 문제 0
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        int all = Integer.parseInt(st.nextToken());
+        int num = Integer.parseInt(st.nextToken());
+        Deque<Integer> q = new LinkedList<>();
+        
+        for(int i=1;i<=all;i++){
+            q.add(i);
+        }
+        sb.append("<");
+        
+        while(q.size() > 1){
+            for(int i=0;i<num-1;i++){
+                q.add(q.poll());
+            }
+            sb.append(q.poll()).append(", ");
+        }
+        sb.append(q.poll()).append(">");
+        
+        System.out.println(sb);
+    }
+}
+```
+
+1927. 최소 힙
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        PriorityQueue<Integer> q = new PriorityQueue<>();
+        
+        for(int i=0;i<count;i++){
+            int num = Integer.parseInt(br.readLine());
+            if(num == 0){
+                if(q.isEmpty()){
+                    sb.append(0).append("\n");
+                }else{
+                    sb.append(q.poll()).append("\n");
+                }
+            }else{
+                q.add(num);
+            }
+        }
+        System.out.println(sb);
+    }
+}
+```
+
+11286. 절댓값 힙
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int count = Integer.parseInt(br.readLine());
+        
+		PriorityQueue<Integer> q = new PriorityQueue<Integer>(new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				if(Math.abs(o1) > Math.abs(o2)) {
+					return Math.abs(o1) - Math.abs(o2);
+				}else if(Math.abs(o1) == Math.abs(o2)) {
+					return o1 - o2;
+				}else {
+					return -1;
+				}
+			}
+        });
+        
+        for(int i=0;i<count;i++){
+            int num = Integer.parseInt(br.readLine());
+            if(num == 0){
+                if(q.isEmpty()){
+                    sb.append(0).append("\n");
+                }else{
+                    sb.append(q.poll()).append("\n");
+                }
+            }else{
+                q.add(num);
+            }
+        }
+        System.out.println(sb);
+    }
+}
+```
