@@ -163,10 +163,181 @@
  
   <br/><br/>
  
+ ## 9012 번 : 괄호
+ 
+ ```java
+ public class b9012 {
+  
+  static List<Integer> list = new ArrayList<>();
+   
+  public static void pushX() {
+    list.add(1);
+  }
+  public static int popX() {
+    int size = sizeX();
+    if(size <= 0) {
+      return 0;
+    }
+    list.remove(size-1);
+    return 1;
+  }
+  public static int sizeX() {
+    if(list.isEmpty()) {
+      return 0;
+    }
+    return list.size();
+  }
+   
+  public static void main(String[] args) throws IOException {
+    
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    
+    int T = Integer.parseInt(br.readLine());
+    int popNum = 1;
+    for(int i=0; i<T; i++) {
+      list.clear();
+      String input = br.readLine();
+      for(int j=0; j<input.length(); j++) {
+        popNum = 1;
+        if(input.charAt(j) == '(') {
+          pushX();
+        } else if(input.charAt(j) == ')') {
+          popNum = popX();
+        }
+        
+        if(j == input.length()-1 && list.isEmpty() && popNum == 1) {
+          bw.write("YES" + "\n");
+          break;
+        }
+        if(j == input.length()-1 && !list.isEmpty()) {
+          bw.write("NO" + "\n");
+          break;
+        }
+        if(popNum == 0 ) {
+          bw.write("NO" + "\n");
+          break;
+        }
+        
+      }
+    }    
+
+    bw.flush();
+    bw.close();
+    br.close();
+    
+  }
+}
+
+ ```
  
  
+ <br/><br/>
  
+ ## 10773 번 : 제로
  
+ ```java
+ public class b10773 {
+  
+  static List<Integer> list = new ArrayList<>();
+  
+  public static void pushX(int x) {
+    list.add(x);
+  }
+  
+  public static void popX() {
+    list.remove(sizeX()-1);
+  }
+  
+  public static int sizeX() {
+    if(list.isEmpty()) {
+      return 0;
+    }
+    return list.size();
+  }
+   
+  public static void main(String[] args) throws IOException {
+    
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    // BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    
+    int N = Integer.parseInt(br.readLine());
+    
+    for(int i=0; i<N; i++) {
+      int num = Integer.parseInt(br.readLine());
+      if(num != 0) {
+        pushX(num);
+      } else {
+        popX();
+      }
+    }
+    
+    int sum =0;
+    for(int i=0; i < list.size(); i++) {
+      sum += list.get(i).intValue();
+    }
+    
+    System.out.println(sum);
+    
+    br.close();
+  
+    
+  }
+}
+
+ ```
+ 
+ <br/><br/>
+ 
+ ## 2164 번 : 카드2
+ 
+ ```java
+ public class b2164 {
+  
+  
+  
+  // 맨앞의 숫자 삭제
+  // 그 다음의 맨앞 숫자를 맨뒤에 넣기
+  public static int card_game(List<Integer> current) {
+    
+    if(current.size() == 1) {
+      return current.get(0);
+    }
+    else {
+      List<Integer> keep = new ArrayList<>();
+    
+      for(int i=0; i<current.size(); i++) {
+        if((i+1) % 2 == 0) keep.add(current.get(i));
+      }
+    
+      if(current.size() % 2 == 1) {
+        int num = keep.remove(0);
+        keep.add(num);
+      } 
+      
+      return card_game(keep);
+    }
+  }
+  
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int N = Integer.parseInt(br.readLine());
+    
+    List<Integer> list = new ArrayList<>();
+    
+    for(int i=1; i<=N; i++) {
+      list.add(i);
+    }
+    
+    int result = card_game(list);
+    
+    System.out.println(result);
+    
+    br.close();
+  }
+}
+
+ ```
  
  
  
