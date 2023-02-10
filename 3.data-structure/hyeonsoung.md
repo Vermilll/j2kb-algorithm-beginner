@@ -70,6 +70,10 @@ public class Sol10828 {
 ## 9012. 괄호
 https://www.acmicpc.net/problem/9012
 
+### next vs nextLine(https://devlog-wjdrbs96.tistory.com/80)
+next(), nextLine()는 Scanner 클래스의 메소드이다. 공통점은 둘다 문자열로 반환을 시켜준다는 점이고 차이점은 개행문자를 무시하냐 안하냐의 차이이다.
+
+
 ### 코드
 
 ```java
@@ -176,6 +180,41 @@ public class Sol2164 {
 			que.add(que.poll());
 		}
 		System.out.println(que.poll());
+	}
+}
+```
+
+## 10773. 제로
+https://www.acmicpc.net/problem/10773
+
+### 코드
+
+```java
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Sol10773 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		Stack<Integer> stack = new Stack<>();
+		for(int i = 0; i < n; i++) {
+			int add = sc.nextInt();
+			if(add == 0) {
+				stack.pop();
+			}
+			else {
+				stack.add(add);
+			}
+		}
+		int sum = 0;
+		
+		while(!stack.isEmpty()) {
+			sum += stack.pop();
+		}
+		System.out.println(sum);
 	}
 }
 ```
