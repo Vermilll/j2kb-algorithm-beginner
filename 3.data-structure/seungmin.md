@@ -337,6 +337,47 @@ public class Main{
 
 2812. 크게 만들기
 ```java
+import java.io.*;
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        
+        int count = Integer.parseInt(st.nextToken());
+        int del = Integer.parseInt(st.nextToken());
+        int l = count - del;
+        String s = br.readLine();
+        String[] arr = s.split("");
+        LinkedList<Integer> q1 = new LinkedList<>();
+        LinkedList<Integer> q2 = new LinkedList<>();
+        
+        for(int i=0;i<count;i++){
+            q1.add(Integer.parseInt(arr[i]));
+        }
+    
+        while(del != 0 && !q1.isEmpty()){
+            if(q2.isEmpty() || q1.peek() <= q2.peekLast()){
+                q2.add(q1.poll());
+            }else{
+                q2.pollLast();
+                del--;
+            }
+        }
+        
+        while(!q1.isEmpty()){
+            q2.add(q1.poll());
+        }
+        
+        for(int i=0;i<l;i++){
+            sb.append(q2.poll());
+        }
+        
+        System.out.println(sb);
+    }
+}
 ```
 
 18258. 큐2
@@ -450,7 +491,51 @@ public class Main{
 
 1966. 프린터 큐
 ```java
+import java.util.*;
+import java.io.*;
 
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int a = Integer.parseInt(br.readLine());
+        
+        for(int i=0;i<a;i++){
+            LinkedList<Integer> q = new LinkedList<>();
+            LinkedList<Integer> r = new LinkedList<>();
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int count = Integer.parseInt(st.nextToken());
+            int index = Integer.parseInt(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            int print = 0;
+            
+            for(int j=0;j<count;j++){
+                q.add(Integer.parseInt(st.nextToken()));
+                r.add(j);
+            }
+            
+            while(!q.isEmpty()){
+                boolean max = true;
+                for(int k=1;k<q.size();k++){
+                    if(q.get(k)>q.peek()){
+                        q.add(q.poll());
+                        r.add(r.poll());
+                        max = false;
+                        break;
+                    }
+                }
+                
+                if(max){
+                    q.poll();
+                    print++;
+                    if(r.poll() == index){
+                        System.out.println(print);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
 ```
 
 11866. 요세푸스 문제 0
