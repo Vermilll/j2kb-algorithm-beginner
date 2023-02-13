@@ -29,3 +29,30 @@ public class Sol10870 {
 	}
 }
 ```
+
+## 2750. 수 정렬하기
+https://www.acmicpc.net/problem/2750
+
+### 코드
+
+```java
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Sol2750 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int [] arr = new int [n];
+		for(int i = 0; i < n; i++) {
+			arr[i] = sc.nextInt();
+		}
+		Arrays.sort(arr);
+		for(int i = 0; i < n; i++) {
+			System.out.println(arr[i]);
+		}
+	}
+}
+
+```
