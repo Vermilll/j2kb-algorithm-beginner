@@ -132,6 +132,10 @@ public class Sol10814 {
 ## 1427. 소트인사이드
 https://www.acmicpc.net/problem/1427
 
+## Arrays.Sort Collections.Sort
+https://codingnojam.tistory.com/38
+
+
 ### 코드
 
 ```java
