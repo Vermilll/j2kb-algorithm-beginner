@@ -95,6 +95,9 @@ public class Sol10989 {
 ## 10814. 나이순 정렬
 https://www.acmicpc.net/problem/10814
 
+### Comparator와 Comparable
+https://st-lab.tistory.com/243
+
 ### 코드
 
 ```java
