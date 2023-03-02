@@ -533,3 +533,69 @@ public class Main{
     }
 }
 ```
+
+*2178. 미로 탐색*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static boolean[][] check;
+    static boolean[][] arr;
+    static int[][] count;
+    static int w,h;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        h = Integer.parseInt(st.nextToken());
+        w = Integer.parseInt(st.nextToken());
+        arr = new boolean[w+2][h+2];
+        check = new boolean[w+2][h+2];
+        count = new int[w+2][h+2];
+        
+        for(int i=1;i<h+1;i++){
+            String[] a = br.readLine().split("");
+            for(int j=1;j<w+1;j++){
+                if(a[j-1].equals("1")){
+                    arr[j][i] = true;
+                }
+            }
+        }
+        
+        bfs(1,1);
+        System.out.println(count[w][h]);
+    }
+    
+    public static void bfs(int x,int y){
+        check[x][y] = true;
+        count[x][y] = 1;
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {x,y});
+        
+        while(!q.isEmpty()){
+            if(check[w][h]){
+                return;
+            }
+            
+            int[] now = q.poll();
+            int nowx = now[0];
+            int nowy = now[1];
+            
+            for(int i=-1;i<2;i++){
+                if(arr[nowx+i][nowy] && !check[nowx+i][nowy]){
+                    q.add(new int[] {nowx+i,nowy});
+                    count[nowx+i][nowy] = count[nowx][nowy] + 1;
+                    check[nowx+i][nowy] = true;
+                }
+                
+                if(arr[nowx][nowy+i] && !check[nowx][nowy+i]){
+                    q.add(new int[] {nowx,nowy+i});
+                    count[nowx][nowy+i] = count[nowx][nowy] + 1;
+                    check[nowx][nowy+i] = true;
+                }
+            }
+        }
+    }
+}
+```
