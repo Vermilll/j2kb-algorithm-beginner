@@ -261,3 +261,100 @@ public class Main{
     }
 }
 ```
+
+*11725. 트리의 부모 찾기*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static int count;
+    static ArrayList<Integer>[] list;
+    static boolean[] check;
+    static int[] parent;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        count = Integer.parseInt(br.readLine());
+        
+        list = new ArrayList[count+1];
+        parent = new int[count+1];
+        check = new boolean[count+1];
+        
+        for(int i=1;i<count+1;i++){
+            list[i] = new ArrayList<Integer>();
+        }
+        
+        for(int i=0;i<count-1;i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            
+            list[a].add(b);
+            list[b].add(a);
+        }
+        
+        for(int i=1;i<count+1;i++){
+            if(!check[i]){
+                dfs(i);
+            }
+        }
+        
+        for(int i=2;i<count+1;i++){
+            System.out.println(parent[i]);
+        }
+    }
+    
+    public static void dfs(int num){
+        if(!check[num]){
+            check[num] = true;
+            
+            for(int a : list[num]){
+                if(!check[a]){
+                    parent[a] = num;
+                    dfs(a);
+                }
+            }
+        }
+    }
+}
+```
+
+*1697. 숨바꼭질*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int a = Integer.parseInt(st.nextToken());
+        int b = Integer.parseInt(st.nextToken());
+        int[] time = new int[100001];
+        boolean[] check = new boolean[100001];
+        Queue<Integer> q = new LinkedList<>();
+        q.add(a);
+        check[a] = true;
+        time[a] = 0;
+        
+        while(!q.isEmpty()){
+            int num = q.poll();
+            int[] arr = {num-1,num+1,num*2};
+            for(int i=0;i<3;i++){
+                if(arr[i] < 0 || arr[i] > 100000 || check[arr[i]]){
+                    continue;
+                }else{
+                    check[arr[i]] = true;
+                    time[arr[i]] = time[num]+1;
+                    if(check[b]){
+                        break;
+                    }
+                    q.add(arr[i]);
+                }
+            }
+        }
+        System.out.println(time[b]);
+    }
+}
+```
