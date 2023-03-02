@@ -362,3 +362,174 @@ public class Main{
     }
 }
 ```
+
+*5567. 결혼식*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static boolean[] check;
+    static boolean[][] arr;
+    static int answer = 0;
+    static int count;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        count = Integer.parseInt(br.readLine());
+        int a = Integer.parseInt(br.readLine());
+        arr = new boolean[count+1][count+1];
+        check = new boolean[count+1];
+        check[1] = true;
+        
+        for(int i=0;i<a;i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            arr[x][y] = arr[y][x] = true;
+        }
+        
+        for(int i=1;i<count+1;i++){
+            if(arr[1][i]){
+                if(!check[i]){
+                    answer++;
+                    check[i] = true;
+                }
+                bfs(i);
+            }
+        }
+        System.out.println(answer);
+    }
+    
+    public static void bfs(int num){
+        for(int i=1;i<count+1;i++){
+            if(arr[num][i] && !check[i]){
+                check[i] = true;
+                answer++;
+            }
+        }
+    }
+}
+```
+
+*2667. 단지번호붙이기*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static boolean[][] arr;
+    static boolean[][] check;
+    static int num;
+    static ArrayList<Integer> list = new ArrayList<>();
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        arr = new boolean[count+2][count+2];
+        check = new boolean[count+2][count+2];
+        
+        for(int i=1;i<count+1;i++){
+            String[] a = br.readLine().split("");
+            for(int j=1;j<count+1;j++){
+                if(a[j-1].equals("1")){
+                    arr[j][i] = true;
+                }
+            }
+        }
+        
+        for(int i=1;i<count+1;i++){
+            for(int j=1;j<count+1;j++){
+                if(arr[i][j] && !check[i][j]){
+                    num = 0;
+                    dfs(i,j);
+                    list.add(num);
+                }
+            }
+        }
+        
+        Collections.sort(list);
+        System.out.println(list.size());
+        for(int i=0;i<list.size();i++){
+            System.out.println(list.get(i));
+        }
+    }
+    
+    public static void dfs(int x,int y){
+        num++;
+        check[x][y] = true;
+        
+        if(arr[x-1][y] && !check[x-1][y]){
+            dfs(x-1,y);
+        }
+        if(arr[x+1][y] && !check[x+1][y]){
+            dfs(x+1,y);
+        }
+        if(arr[x][y+1] && !check[x][y+1]){
+            dfs(x,y+1);
+        }
+        if(arr[x][y-1] && !check[x][y-1]){
+            dfs(x,y-1);
+        }
+    }
+}
+```
+
+*4963. 섬의 개수*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static int count;
+    static boolean[][] arr;
+    static boolean[][] check;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        
+        while(true){
+            count = 0;
+            String[] a = br.readLine().split(" ");
+            if(a[0].equals("0") && a[1].equals("0")){
+                break;
+            }
+            int w = Integer.parseInt(a[0]);
+            int h = Integer.parseInt(a[1]);
+            arr = new boolean[52][52];
+            check = new boolean[52][52];
+            
+            for(int i=1;i<h+1;i++){
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                for(int j=1;j<w+1;j++){
+                    if(st.nextToken().equals("1")){
+                        arr[j][i] = true;
+                    }
+                }
+            }
+            
+            for(int i=1;i<h+1;i++){
+                for(int j=1;j<w+1;j++){
+                    if(arr[j][i] && !check[j][i]){
+                        count++;
+                        dfs(j,i);
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+    }
+    
+    public static void dfs(int x,int y){
+        check[x][y] = true;
+        
+        for(int i=-1;i<2;i++){
+            for(int j=-1;j<2;j++){
+                if(arr[x+j][y+i] && !check[x+j][y+i]){
+                    dfs(x+j,y+i);
+                }
+            }
+        }
+    }
+}
+```
