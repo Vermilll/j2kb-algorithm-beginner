@@ -599,3 +599,81 @@ public class Main{
     }
 }
 ```
+
+*10026. 적록색약*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static String[][] arr;
+    static boolean[][] check;
+    static int count,a;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        a = Integer.parseInt(br.readLine());
+        arr = new String[a+2][a+2];
+        check = new boolean[a+2][a+2];
+        count = 0;
+        
+        for(int i=0;i<a+2;i++){
+            Arrays.fill(arr[i],"a");
+        }
+        
+        for(int i=1;i<a+1;i++){
+            String[] s = br.readLine().split("");
+            for(int j=1;j<a+1;j++){
+                arr[j][i] = s[j-1];
+            }
+        }
+        
+        for(int i=1;i<a+1;i++){
+            for(int j=1;j<a+1;j++){
+                if(!check[j][i]){
+                    count++;
+                    dfs(j,i,arr[j][i]);
+                }
+            }
+        }
+        System.out.print(count + " ");
+        
+        check = new boolean[a+2][a+2];
+        count = 0;
+        
+        for(int i=1;i<a+1;i++){
+            for(int j=1;j<a+1;j++){
+                if(arr[j][i].equals("G")){
+                    arr[j][i] = "R";
+                }
+            }
+        }
+        for(int i=1;i<a+1;i++){
+            for(int j=1;j<a+1;j++){
+                if(!check[j][i]){
+                    count++;
+                    dfs(j,i,arr[j][i]);
+                }
+            }
+        }
+        System.out.println(count);
+    }
+    
+    public static void dfs(int x, int y, String c){
+        check[x][y] = true;
+        
+        if(!check[x-1][y] && arr[x-1][y].equals(c)){
+            dfs(x-1,y,c);
+        }
+        if(!check[x+1][y] && arr[x+1][y].equals(c)){
+            dfs(x+1,y,c);
+        }
+        if(!check[x][y-1] && arr[x][y-1].equals(c)){
+            dfs(x,y-1,c);
+        }
+        if(!check[x][y+1] && arr[x][y+1].equals(c)){
+            dfs(x,y+1,c);
+        }
+    }
+}
+```
