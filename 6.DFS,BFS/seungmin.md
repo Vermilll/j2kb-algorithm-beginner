@@ -677,3 +677,210 @@ public class Main{
     }
 }
 ```
+
+*2589. 보물섬*
+```java
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class Main{
+    static boolean[][] arr;
+    static boolean[][] check;
+    static int[][] distance;
+    static int max = 0;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int h = Integer.parseInt(st.nextToken());
+        int w = Integer.parseInt(st.nextToken());
+        arr = new boolean[w+2][h+2];
+        
+        for(int i=1;i<h+1;i++){
+            String[] s = br.readLine().split("");
+            for(int j=1;j<w+1;j++){
+                if(s[j-1].equals("L")){
+                    arr[j][i] = true;
+                }
+            }
+        }
+        
+        for(int i=1;i<h+1;i++){
+            for(int j=1;j<w+1;j++){
+                if(arr[j][i]){
+                    check = new boolean[w+2][h+2];
+                    check[j][i] = true;
+                    distance = new int[w+2][h+2];
+                    distance[j][i] = 0;
+                    bfs(j,i);
+                }
+            }
+        }
+        System.out.println(max);
+    }
+    
+    public static void bfs(int x, int y){
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {x,y});
+        
+        while(!q.isEmpty()){
+            int[] now = q.poll();
+            int nowx = now[0];
+            int nowy = now[1];
+            
+            if(arr[nowx-1][nowy] && !check[nowx-1][nowy]){
+                check[nowx-1][nowy] = true;
+                q.add(new int[] {nowx-1,nowy});
+                distance[nowx-1][nowy] = distance[nowx][nowy] + 1;
+                max = Math.max(max,distance[nowx-1][nowy]);
+            }
+            
+            if(arr[nowx+1][nowy] && !check[nowx+1][nowy]){
+                check[nowx+1][nowy] = true;
+                q.add(new int[] {nowx+1,nowy});
+                distance[nowx+1][nowy] = distance[nowx][nowy] + 1;
+                max = Math.max(max,distance[nowx+1][nowy]);
+            }
+            
+            if(arr[nowx][nowy-1] && !check[nowx][nowy-1]){
+                check[nowx][nowy-1] = true;
+                q.add(new int[] {nowx,nowy-1});
+                distance[nowx][nowy-1] = distance[nowx][nowy] + 1;
+                max = Math.max(max,distance[nowx][nowy-1]);
+            }
+            
+            if(arr[nowx][nowy+1] && !check[nowx][nowy+1]){
+                check[nowx][nowy+1] = true;
+                q.add(new int[] {nowx,nowy+1});
+                distance[nowx][nowy+1] = distance[nowx][nowy] + 1;
+                max = Math.max(max,distance[nowx][nowy+1]);
+            }
+        }
+    }
+}
+```
+
+*16234. 인구 이동*
+```java
+```
+
+*5014. 스타트링크*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static boolean[] check;
+    static int[] times;
+    static int top,first,target,up,down;
+    
+    public static void main(String[] args)throws Exception{
+        Scanner sc = new Scanner(System.in);
+        StringTokenizer st = new StringTokenizer(sc.nextLine());
+        top = Integer.parseInt(st.nextToken());
+        first = Integer.parseInt(st.nextToken());
+        target = Integer.parseInt(st.nextToken());
+        up = Integer.parseInt(st.nextToken());
+        down = Integer.parseInt(st.nextToken());
+        
+        times = new int[top+1];
+        times[first] = 0;
+        check = new boolean[top+1];
+        check[first] = true;
+        
+        bfs(first);
+        if(check[target]){
+            System.out.println(times[target]);
+        }else{
+            System.out.println("use the stairs");
+        }
+    }
+    
+    public static void bfs(int num){
+        Queue<Integer> q = new LinkedList<>();
+        q.add(num);
+        
+        while(!q.isEmpty()){
+            int a = q.poll();
+            
+            if(a+up<=top && !check[a+up]){
+                check[a+up] = true;
+                times[a+up] = times[a] + 1;
+                q.add(a+up);
+            }
+            
+            if(a-down>=1 && !check[a-down]){
+                check[a-down] = true;
+                times[a-down] = times[a] + 1;
+                q.add(a-down);
+            }
+        }
+    }
+}
+```
+
+*2468. 안전 영역*
+```java
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class Main{
+    static int[][] arr;
+    static boolean[][] check;
+    static int now = 0;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        arr = new int[N+2][N+2];
+        int ans = 1;
+        int high = 1;
+        
+        for(int i=1;i<N+1;i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for(int j=1;j<N+1;j++){
+                int num = Integer.parseInt(st.nextToken());
+                high = Math.max(high, num);
+                arr[j][i] = num;
+            }
+        }
+        
+        for(int i=1;i<high;i++){
+            check = new boolean[N+2][N+2];
+            int count = 0;
+            now = i;
+            
+            for(int a=1;a<N+1;a++){
+                for(int b=1;b<N+1;b++){
+                    if(!check[b][a] && arr[b][a]>now){
+                        count++;
+                        dfs(b,a);
+                    }
+                }
+            }
+            ans = Math.max(ans, count);
+        }
+        
+        System.out.println(ans);
+    }
+    
+    public static void dfs(int x, int y){
+        check[x][y] = true;
+        
+        if(arr[x-1][y]>now && !check[x-1][y]){
+            dfs(x-1,y);
+        }
+        if(arr[x+1][y]>now && !check[x+1][y]){
+            dfs(x+1,y);
+        }
+        if(arr[x][y-1]>now && !check[x][y-1]){
+            dfs(x,y-1);
+        }
+        if(arr[x][y+1]>now && !check[x][y+1]){
+            dfs(x,y+1);
+        }
+    }
+}
+`
