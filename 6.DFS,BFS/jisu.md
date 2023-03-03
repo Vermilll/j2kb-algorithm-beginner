@@ -52,6 +52,9 @@ console.log(result);
 
 ### 11725 / 트리의 부모 찾기
 
+- bfs를 이용하고 check 배열 인덱스(자식 노드)에 값(부모 노드)를 입력한다.
+- [https://velog.io/@dark6ro/백준-11725번-트리의-부모-찾기](https://velog.io/@dark6ro/%EB%B0%B1%EC%A4%80-11725%EB%B2%88-%ED%8A%B8%EB%A6%AC%EC%9D%98-%EB%B6%80%EB%AA%A8-%EC%B0%BE%EA%B8%B0)
+
 ```jsx
 let fs = require("fs");
 let input = fs.readFileSync("/dev/stdin").toString().trim().split("\n");
@@ -60,29 +63,30 @@ const solution = (input) => {
   const n = +input.shift();
   const tree = Array.from(Array(n + 1), () => []);
   const check = new Array(n + 1).fill(0);
-  for (let [from, to] of input.map((e) => e.split(" ").map(Number))) {
+  
+for (let [from, to] of input.map((e) => e.split(" ").map(Number))) {
     tree[from].push(to);
-    tree[to].push(from);
+    tree[to].push(from); // 무방향 트리이므로 A->B, B->A 정보를 모두 넣음
   }
 
   const queue = [];
   check[1] = 1;
   for (let next of tree[1]) {
-    // 1이 시작이고 child 노드를 넣고 check[child]엔 부모노드의 값을 넣어준다.
+    // 1이 시작이고 child 노드를 넣고 check[child]엔 부모노드의 값을 넣음
     check[next] = 1;
     queue.push(next);
   }
   while (queue.length) {
     const cur = queue.shift();
-    for (let next of tree[cur]) {
+    for (let next of tree[cur]) { // 노드를 순회하면서, 방문한 노드라면 건너뜀
       if (!check[next]) {
-        check[next] = cur; // 부모 노드의 값을 넣어준다.
+        check[next] = cur; // next 인덱스에는 node(부모 노드)값을 넣음
         queue.push(next);
       }
     }
   }
   // console.log(check);
-  return check.slice(2).join("\n");
+  return check.slice(2).join("\n"); 체크 배열의 2번 인덱스(2번 노드)부터 출력
 };
 
 console.log(solution(input));
