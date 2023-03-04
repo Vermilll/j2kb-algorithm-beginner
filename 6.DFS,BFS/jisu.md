@@ -54,6 +54,11 @@ console.log(result);
 
 - bfs를 이용하고 check 배열 인덱스(자식 노드)에 값(부모 노드)를 입력한다.
 - [https://velog.io/@dark6ro/백준-11725번-트리의-부모-찾기](https://velog.io/@dark6ro/%EB%B0%B1%EC%A4%80-11725%EB%B2%88-%ED%8A%B8%EB%A6%AC%EC%9D%98-%EB%B6%80%EB%AA%A8-%EC%B0%BE%EA%B8%B0)
+- BFS의 동작 방식
+1) 탐색 시작 노드를 큐에 삽입하고 방문 처리한다.
+2) 큐에서 노드를 꺼내 해당 노드의 인접 노드 중에서 방문하지 않은 노드를 모두 큐에 삽입하고 방문 처리한다.
+3) 2번의 과정을 더 이상 수행할 수 없을 때까지 반복한다.
+
 
 ```jsx
 let fs = require("fs");
@@ -91,3 +96,4 @@ for (let [from, to] of input.map((e) => e.split(" ").map(Number))) {
 
 console.log(solution(input));
 ```
+
