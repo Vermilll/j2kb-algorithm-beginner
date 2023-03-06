@@ -154,3 +154,95 @@ public class Main{
     }
 }
 ```
+
+*4485. 녹색 옷 입은 애가 젤다지?*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static int[][] arr, money;
+    static boolean[][] check;
+    static int count, m;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int m = 0;
+        while(true){
+            m++;
+            count = Integer.parseInt(br.readLine());
+            if(count == 0){
+                break;
+            }
+            arr = new int[count][count];
+            money = new int[count][count];
+            check = new boolean[count][count];
+            for(int i=0;i<count;i++){
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                for(int j=0;j<count;j++){
+                    arr[j][i] = Integer.parseInt(st.nextToken());
+                }
+            }
+            bfs();
+            System.out.println("Problem " + m + ": " + money[count-1][count-1]);
+        }
+    }
+    
+    public static void bfs(){
+        check[0][0] = true;
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {0,0});
+        money[0][0] = arr[0][0];
+            
+        while(!q.isEmpty()){
+            int[] now = q.poll();
+            int nowx = now[0];
+            int nowy = now[1];
+            
+            if(nowx-1 >= 0){
+                if(!check[nowx-1][nowy]){
+                    check[nowx-1][nowy] = true;
+                    money[nowx-1][nowy] = money[nowx][nowy] + arr[nowx-1][nowy];
+                    q.add(new int[] {nowx-1,nowy});
+                }else if(money[nowx-1][nowy] > money[nowx][nowy] + arr[nowx-1][nowy]){
+                    money[nowx-1][nowy] = money[nowx][nowy] + arr[nowx-1][nowy];
+                    q.add(new int[] {nowx-1,nowy});
+                }
+            }
+            
+            if(nowy-1 >= 0){
+                if(!check[nowx][nowy-1]){
+                    check[nowx][nowy-1] = true;
+                    money[nowx][nowy-1] = money[nowx][nowy] + arr[nowx][nowy-1];
+                    q.add(new int[] {nowx,nowy-1});
+                }else if(money[nowx][nowy-1] > money[nowx][nowy] + arr[nowx][nowy-1]){
+                    money[nowx][nowy-1] = money[nowx][nowy] + arr[nowx][nowy-1];
+                    q.add(new int[] {nowx,nowy-1});
+                }
+            }
+            
+            if(nowx+1 < count){
+                if(!check[nowx+1][nowy]){
+                    check[nowx+1][nowy] = true;
+                    money[nowx+1][nowy] = money[nowx][nowy] + arr[nowx+1][nowy];
+                    q.add(new int[] {nowx+1,nowy});
+                }else if(money[nowx+1][nowy] > money[nowx][nowy] + arr[nowx+1][nowy]){
+                    money[nowx+1][nowy] = money[nowx][nowy] + arr[nowx+1][nowy];
+                    q.add(new int[] {nowx+1,nowy});
+                }
+            }
+            
+            if(nowy+1 < count){
+                if(!check[nowx][nowy+1]){
+                    check[nowx][nowy+1] = true;
+                    money[nowx][nowy+1] = money[nowx][nowy] + arr[nowx][nowy+1];
+                    q.add(new int[] {nowx,nowy+1});
+                }else if(money[nowx][nowy+1] > money[nowx][nowy] + arr[nowx][nowy+1]){
+                    money[nowx][nowy+1] = money[nowx][nowy] + arr[nowx][nowy+1];
+                    q.add(new int[] {nowx,nowy+1});
+                }
+            }
+        }
+    }
+}
+```
