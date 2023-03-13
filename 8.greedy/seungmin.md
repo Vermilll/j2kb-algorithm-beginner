@@ -64,3 +64,39 @@ public class Main{
     }
 }
 ```
+
+*1946. 신입 사원*
+```java
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int all = Integer.parseInt(br.readLine());
+        for(int l=0;l<all;l++){
+            int count = Integer.parseInt(br.readLine());
+            int ans = count;
+            int[] arr = new int[count];
+            
+            for(int i=0;i<count;i++){
+                StringTokenizer st = new StringTokenizer(br.readLine());
+                int a = Integer.parseInt(st.nextToken());
+                arr[a-1] = Integer.parseInt(st.nextToken());
+            }
+            
+            int max = arr[0];
+            
+            for(int i=0;i<count;i++){
+                if(max < arr[i]){
+                    ans--;
+                }else{
+                    max = arr[i];
+                }
+            }
+            System.out.println(ans);
+        }
+    }
+}
+```
