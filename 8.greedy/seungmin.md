@@ -100,3 +100,110 @@ public class Main{
     }
 }
 ```
+
+*.11497. 통나무 건너뛰기*
+```java
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int all = Integer.parseInt(br.readLine());
+        for(int i=0;i<all;i++){
+            int count = Integer.parseInt(br.readLine());
+            int[] arr = new int[count];
+            int[] to = new int[count];
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            
+            for(int j=0;j<count;j++){
+                arr[j] = Integer.parseInt(st.nextToken());
+            }
+            Arrays.sort(arr);
+            
+            for(int j=0;j<count;j++){
+                if(j%2 == 0){
+                    to[j/2] = arr[j];
+                }else{
+                    to[count-1-j/2] = arr[j];
+                }
+            }
+            
+            int ans = 0;
+            for(int j=1;j<count;j++){
+                ans = Math.max(ans, Math.abs(to[j-1]-to[j]));
+            }
+            System.out.println(ans);
+        }
+    }
+}
+
+```
+
+*42883. 큰 수 만들기*
+```java
+class Solution {
+    public String solution(String number, int k) {
+        StringBuilder sb = new StringBuilder();
+        int index = 0;
+        
+        for(int i=0;i<number.length()-k;i++) {
+            int max = 0;
+            for(int j=index;j<=k+i;j++) {
+                if(max < number.charAt(j)-'0') {
+                    max = number.charAt(j)-'0';
+                    index = j+1;
+                }
+            }
+            sb.append(max);
+        }
+        return sb.toString();
+    }
+}
+```
+
+
+*42862. 체육복*
+```java
+import java.util.*;
+
+class Solution {
+    public int solution(int n, int[] lost, int[] reserve) {
+        int answer = 0;
+        int[] arr = new int[n+1];
+        Arrays.sort(lost);
+        Arrays.sort(reserve);
+        
+        for(int i=0;i<reserve.length;i++){
+            arr[reserve[i]]++;
+        }
+        
+        for(int i=0;i<lost.length;i++){
+            arr[lost[i]]--;
+        }
+        
+        for(int i=0;i<lost.length;i++){
+            int a = lost[i];
+            if(arr[a] == 0){
+                continue;
+            }
+            if(a-1 >= 0 && arr[a-1]>0){
+                arr[a-1]--;
+                arr[a]++;
+            }else if(a+1 <= n && arr[a+1]>0){
+                arr[a+1]--;
+                arr[a]++;
+            }
+        }
+        
+        for(int i=1;i<n+1;i++){
+            if(arr[i]>=0){
+                answer++;
+            }
+        }
+        
+        return answer;
+    }
+}
+```
