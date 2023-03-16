@@ -1,5 +1,6 @@
 ## 7576 번 : 토마토
 
+```
 public class b7576 {
   public static void main(String[] args) throws IOException {
     
@@ -86,3 +87,5 @@ public class b7576 {
   }
   
 }
+
+```
