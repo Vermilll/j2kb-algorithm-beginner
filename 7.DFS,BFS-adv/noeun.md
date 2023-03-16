@@ -1,6 +1,6 @@
 ## 7576 번 : 토마토
 
-```
+```java
 public class b7576 {
   public static void main(String[] args) throws IOException {
     
