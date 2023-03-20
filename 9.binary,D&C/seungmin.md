@@ -39,3 +39,56 @@ public class Main{
     }
 }
 ```
+
+*1780. 종이의 개수*
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main{
+    static int[][] arr;
+    static int z, v, c;
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        arr = new int[count][count];
+        
+        for(int i=0;i<count;i++){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            for(int j=0;j<count;j++){
+                arr[j][i] = Integer.parseInt(st.nextToken());
+            }
+        }
+        
+        z = v = c = 0;
+        re(0,0,count);
+        System.out.println(z);
+        System.out.println(v);
+        System.out.println(c);
+    }
+    
+    public static void re(int x, int y, int num){
+        int a = arr[x][y];
+        for(int i=0;i<num;i++){
+            for(int j=0;j<num;j++){
+                if(arr[x+j][y+i] != a){
+                    for(int q=0; q<=num/3*2; q+=num/3){
+                        for(int w=0; w<=num/3*2; w+=num/3){
+                            re(x+w, y+q, num/3);
+                        }
+                    }
+                    return;
+                }
+            }
+        }
+        
+        if(a == -1){
+            z++;
+        }else if(a == 0){
+            v++;
+        }else if(a == 1){
+            c++;
+        }
+    }
+}
+```
