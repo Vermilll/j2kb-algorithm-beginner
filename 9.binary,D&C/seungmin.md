@@ -180,3 +180,53 @@ public class Main{
     }
 }
 ```
+
+*2110. 공유기 설치*
+```java
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int house = Integer.parseInt(st.nextToken());
+        int count = Integer.parseInt(st.nextToken());
+        int[] arr = new int[house];
+        
+        for(int i=0;i<house;i++){
+            arr[i] = Integer.parseInt(br.readLine());
+        }
+        
+        Arrays.sort(arr);
+        
+        int left = 1;
+        int right = arr[house-1] - arr[0];
+        int d = 0;
+        int ans = 0;
+        
+        while(left <= right){
+            int mid = (left + right)/2;
+            int start = arr[0];
+            int a = 1;
+            
+            for(int i=0;i<house;i++){
+                d = arr[i] - start;
+                if(d >= mid){
+                    a++;
+                    start = arr[i];
+                }
+            }
+            
+            if(a >= count){
+                ans = mid;
+                left = mid+1;
+            }else{
+                right = mid-1;
+            }
+        }
+        System.out.println(ans);
+    }
+}
+```
