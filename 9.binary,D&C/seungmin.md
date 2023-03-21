@@ -137,3 +137,46 @@ public class Main{
     }
 }
 ```
+
+*2512. 예산*
+```java
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        int[] arr = new int[count];
+        int left = 0;
+        int right = 0;
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i=0;i<count;i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+            right = Math.max(right, arr[i]);
+        }
+        int money = Integer.parseInt(br.readLine());
+        
+        while(left <= right){
+            int mid = (left + right)/2;
+            int a = 0;
+            
+            for(int i=0;i<count;i++){
+                if(arr[i] > mid){
+                    a += mid;
+                }else{
+                    a += arr[i];
+                }
+            }
+            
+            if(a <= money){
+                left = mid+1;
+            }else{
+                right = mid-1;
+            }
+        }
+        System.out.println(right);
+    }
+}
+```
