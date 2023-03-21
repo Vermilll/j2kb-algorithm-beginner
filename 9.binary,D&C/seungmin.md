@@ -230,3 +230,45 @@ public class Main{
     }
 }
 ```
+
+*2470. 두 용액*
+```java
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+public class Main{
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[count];
+        
+        for(int i=0;i<count;i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
+        
+        Arrays.sort(arr);
+        int ans = Math.abs(arr[count-1] + arr[0]);
+        int a = arr[0];
+        int b = arr[count-1];
+        int i = 0;
+        int j = count-1;
+        
+        while(j != i){
+            if(ans > Math.abs(arr[j] + arr[i])){
+                ans = Math.abs(arr[j] + arr[i]);
+                a = arr[i];
+                b = arr[j];
+            }
+            if(arr[j] + arr[i] > 0){
+                j--;
+            }else{
+                i++;
+            }
+        }
+        
+        System.out.println(a + " " + b);
+    }
+}
+```
