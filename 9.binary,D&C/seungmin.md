@@ -92,3 +92,48 @@ public class Main{
     }
 }
 ```
+
+*1992. 쿼드트리*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static int[][] arr;
+    static StringBuilder sb = new StringBuilder();
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int count = Integer.parseInt(br.readLine());
+        arr = new int[count][count];
+        
+        for(int i=0;i<count;i++){
+            String[] s = br.readLine().split("");
+            for(int j=0;j<count;j++){
+                arr[j][i] = Integer.parseInt(s[j]);
+            }
+        }
+        
+        re(0,0,count);
+        System.out.println(sb);
+    }
+    
+    public static void re(int x, int y, int num){
+        int a = arr[x][y];
+        for(int i=0;i<num;i++){
+            for(int j=0;j<num;j++){
+                if(arr[x+j][y+i] != a){
+                    sb.append("(");
+                    re(x, y, num/2);
+                    re(x+num/2, y, num/2);
+                    re(x, y+num/2, num/2);
+                    re(x+num/2, y+num/2, num/2);
+                    sb.append(")");
+                    return;
+                }
+            }
+        }
+        sb.append(a);
+    }
+}
+```
