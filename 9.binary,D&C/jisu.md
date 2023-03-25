@@ -1,5 +1,6 @@
 <h2>2630</h2>
 
+```jsx
 const fs = require("fs");
 const input = fs.readFileSync("dev/stdin").toString().trim().split("\n");
 
@@ -39,3 +40,4 @@ const cutPaper = (row, col, size) => {
 cutPaper(0, 0, size);
 
 console.log(`${zerocnt}\n${onecnt}`);
+```
