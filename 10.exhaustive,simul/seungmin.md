@@ -167,3 +167,285 @@ public class Main{
     }
 }
 ```
+
+*15683. 감시*
+```java
+import java.util.*;
+import java.io.*;
+
+public class Main{
+    static int ah,aw;
+    static int ans;
+    
+    public static void main(String[] args)throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st1 = new StringTokenizer(br.readLine());
+        ah = Integer.parseInt(st1.nextToken());
+        aw = Integer.parseInt(st1.nextToken());
+        int[][] arr = new int[aw][ah];
+        
+        for(int i=0;i<ah;i++){
+            StringTokenizer st2 = new StringTokenizer(br.readLine());
+            for(int j=0;j<aw;j++){
+                arr[j][i] = Integer.parseInt(st2.nextToken());
+            }
+        }
+        ans = Integer.MAX_VALUE;
+        calc(arr, 0, 0);
+        System.out.println(ans);
+    }
+    
+    public static void calc(int[][] cctv, int a, int b){
+        int[][] tmp;
+        if(cctv[a][b] == 1){
+            tmp = cloning(cctv);
+            tmp = left(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = up(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = right(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = down(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+        }else if(cctv[a][b] == 2){
+            tmp = cloning(cctv);
+            tmp = left(tmp, a, b);
+            tmp = right(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = up(tmp, a, b);
+            tmp = down(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+        }else if(cctv[a][b] == 3){
+            tmp = cloning(cctv);
+            tmp = up(tmp, a, b);
+            tmp = right(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = right(tmp, a, b);
+            tmp = down(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = down(tmp, a, b);
+            tmp = left(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = left(tmp, a, b);
+            tmp = up(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+        }else if(cctv[a][b] == 4){
+            tmp = cloning(cctv);
+            tmp = right(tmp, a, b);
+            tmp = down(tmp, a, b);
+            tmp = left(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = down(tmp, a, b);
+            tmp = left(tmp, a, b);
+            tmp = up(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = left(tmp, a, b);
+            tmp = up(tmp, a, b);
+            tmp = right(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+            
+            tmp = cloning(cctv);
+            tmp = up(tmp, a, b);
+            tmp = right(tmp, a, b);
+            tmp = down(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+        }else if(cctv[a][b] == 5){
+            tmp = cloning(cctv);
+            tmp = right(tmp, a, b);
+            tmp = down(tmp, a, b);
+            tmp = left(tmp, a, b);
+            tmp = up(tmp, a, b);
+            if(a != aw-1){
+                calc(tmp, a+1, b);
+            }else if(b != ah-1){
+                calc(tmp, 0, b+1);
+            }else{
+                check(tmp);
+            }
+        }else{
+            if(a != aw-1){
+                calc(cctv, a+1, b);
+            }else if(b != ah-1){
+                calc(cctv, 0, b+1);
+            }else{
+                check(cctv);
+            }
+        }
+    }
+    
+    public static int[][] left(int[][] cctv, int w, int h){
+        for(int i=w-1;0<=i;i--){
+            if(cctv[i][h] == 6){
+                break;
+            }else if(cctv[i][h] != 0){
+                continue;
+            }else if(cctv[i][h] == 0){
+                cctv[i][h] = -1;
+            }
+        }
+        return cctv;
+    }
+    
+    public static int[][] right(int[][] cctv, int w, int h){
+        for(int i=w+1;i<aw;i++){
+            if(cctv[i][h] == 6){
+                break;
+            }else if(cctv[i][h] != 0){
+                continue;
+            }else if(cctv[i][h] == 0){
+                cctv[i][h] = -1;
+            }
+        }
+        return cctv;
+    }
+    
+    public static int[][] up(int[][] cctv, int w, int h){
+        for(int i=h-1;0<=i;i--){
+            if(cctv[w][i] == 6){
+                break;
+            }else if(cctv[w][i] != 0){
+                continue;
+            }else if(cctv[w][i] == 0){
+                cctv[w][i] = -1;
+            }
+        }
+        return cctv;
+    }
+    
+    public static int[][] down(int[][] cctv, int w, int h){
+        for(int i=h+1;i<ah;i++){
+            if(cctv[w][i] == 6){
+                break;
+            }else if(cctv[w][i] != 0){
+                continue;
+            }else if(cctv[w][i] == 0){
+                cctv[w][i] = -1;
+            }
+        }
+        return cctv;
+    }
+    
+   public static void check(int[][] cctv){
+       int count = 0;
+       for(int i=0;i<ah;i++){
+           for(int j=0;j<aw;j++){
+               if(cctv[j][i] == 0){
+                   count++;
+               }
+           }
+       }
+       ans = Math.min(ans, count);
+   }
+    
+   public static int[][] cloning(int[][] a){
+        int b[][] = new int[a.length][a[0].length];
+	    
+        for(int i=0; i<b.length; i++){
+            System.arraycopy(a[i], 0, b[i], 0, a[0].length);
+        }
+       return b;
+   }
+}
+```
